@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">NotePad App</string>
+    <string name="title1">Title</string>
+    <string name="enter_something">Enter Something</string>
+    <string name="to">To</string>
+    <string name="a_note_to_me">A note to me</string>
+    <string name="this_the_detail_of_note_that_you_have_written">This the detail of note that you have written</string>
+    <string name="thu_14_dec_2022_02_17am">Thu, 14 DEc 2022 02:17am</string>
+    <string name="notes">Notes</string>
+    <string name="tod">to</string>
+    <string name="pin_it">pin it</string>
+    <string name="delete_it">delete it</string>
+    <string name="back_button">back button</string>
+    <string name="write_here">Write Here</string>
+</resources>
