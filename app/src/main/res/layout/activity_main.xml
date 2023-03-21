@@ -7,39 +7,25 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/notes"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.appcompat.widget.SearchView
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="16dp"
-        app:queryHint="Search note"
-        app:closeIcon="@drawable/ic_baseline_close_24"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/background"
         app:circularflow_defaultRadius="10dp"
         app:circularflow_radiusInDP="10dp"
+        app:closeIcon="@drawable/ic_baseline_close_24"
         app:layout_constraintBottom_toTopOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryHint="Search note"
         app:searchIcon="@drawable/ic_baseline_search_24"
         app:srcCompat="@drawable/ic_baseline_search_24">
 
