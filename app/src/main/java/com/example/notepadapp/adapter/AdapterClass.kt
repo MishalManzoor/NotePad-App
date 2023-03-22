@@ -1,7 +1,6 @@
 package com.example.notepadapp.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.text.Spannable
@@ -20,11 +19,10 @@ import com.example.notepadapp.roomDatabseClasses.NoteClass
 import java.util.*
 import kotlin.random.Random
 
-class AdapterClass(var context: Context, var onNoteListener: OnNoteListener) :
-    RecyclerView.Adapter<AdapterClass.ViewHolder>() {
+class AdapterClass(var onNoteListener: OnNoteListener) : RecyclerView.Adapter<AdapterClass.ViewHolder>() {
 
-    var mlist: List<NoteClass> = ArrayList()
-    var searchText = ""
+    private var mList: List<NoteClass> = ArrayList()
+    private var searchText = ""
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -34,24 +32,26 @@ class AdapterClass(var context: Context, var onNoteListener: OnNoteListener) :
         var layout: LinearLayout = itemView.findViewById(R.id.linearLayout)
         var delete: ImageView = itemView.findViewById(R.id.delete_note)
 
-        //     var bookmark: ImageView = itemView.findViewById(R.id.pin)
+        var bookmark: ImageView = itemView.findViewById(R.id.bookmark)
         var cardColor: CardView = itemView.findViewById(R.id.card)
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val list: NoteClass = mlist[position]
+
+        val list: NoteClass = mList[position]
         holder.title.text = list.title
         holder.detail.text = list.detail
         holder.layout.visibility = View.VISIBLE
         holder.delete.visibility = View.VISIBLE
         holder.date.text = list.date
 
-        // add random colors into cards
-        holder.cardColor.setCardBackgroundColor(
-            holder.layout.resources
-                .getColor(randomColor(), null)
-        )
+        if(list.pin){
+            holder.bookmark.setImageResource(R.drawable.ic_baseline_bookmark_24)
+        }
+        else{
+            holder.bookmark.setImageResource(R.drawable.ic_baseline_bookmark_border_24)
+        }
 
         // listener to update note
         holder.layout.setOnClickListener {
@@ -60,12 +60,20 @@ class AdapterClass(var context: Context, var onNoteListener: OnNoteListener) :
 
         // listener to delete note
         holder.delete.setOnClickListener {
-            onNoteListener.onDeleteNoteClick(mlist[position])
+            onNoteListener.onDeleteNoteClick(mList[position])
         }
-//
-//        holder.bookmark.setOnClickListener {
-//            onNoteListener.onBoomMarkNoteClick(list)
-//        }
+
+        // to pin notes
+        holder.bookmark.setOnClickListener {
+            onNoteListener.onBoomMarkNoteClick(list, holder.cardColor)
+        }
+
+        // add random colors into cards
+        holder.cardColor.setCardBackgroundColor(
+            holder.layout.resources
+                .getColor(randomColor(), null)
+        )
+
         searchData(holder, position)
     }
 
@@ -96,29 +104,31 @@ class AdapterClass(var context: Context, var onNoteListener: OnNoteListener) :
     }
 
     override fun getItemCount(): Int {
-        return mlist.size
+        return mList.size
     }
 
     // interface for listener
     interface OnNoteListener {
-        //  fun onNoteClick(position : Long, note : NoteClass)
+
         fun onUpdateNoteClick(position: Long, note: NoteClass)
 
-        //    fun onLongNoteClick(position : Long, id : Long)
         fun onDeleteNoteClick(position: NoteClass)
 
-        //   fun onBoomMarkNoteClick(note: NoteClass)
+        fun onBoomMarkNoteClick(note: NoteClass , card : CardView)
 
     }
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(list1: List<NoteClass>) {
+
         // on below line we are clearing
         // our notes arrayList
-        (mlist as ArrayList).clear()
+        (mList as ArrayList).clear()
+
         // on below line we are inserting
         // new list to our all notes list.
-        (mlist as ArrayList).addAll(list1)
+        (mList as ArrayList).addAll(list1)
+
         notifyDataSetChanged()
     }
 
@@ -126,11 +136,11 @@ class AdapterClass(var context: Context, var onNoteListener: OnNoteListener) :
 
 
         // to get a noteClass title in string
-        val title: String = mlist[position]
+        val title: String = mList[position]
             .title.lowercase(Locale.getDefault())
 
         // get noteClass title into holder title (TextView)
-        holder.title.text = mlist[position].title
+        holder.title.text = mList[position].title
 
         if (title.contains(searchText)) {
 
@@ -157,11 +167,11 @@ class AdapterClass(var context: Context, var onNoteListener: OnNoteListener) :
         }
 
         // to get a noteClass title in string
-        val detail: String = mlist.get(position)
+        val detail: String = mList.get(position)
             .detail.lowercase(Locale.getDefault())
 
         // get noteClass title into holder title (TextView)
-        holder.detail.text = mlist.get(position).detail
+        holder.detail.text = mList.get(position).detail
 
         if (detail.contains(searchText)) {
 

@@ -6,7 +6,8 @@ import androidx.lifecycle.LiveData
 import com.example.notepadapp.roomDatabseClasses.NoteClass
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
-    // i will use this class only to insert or get data
+
+    // this class for insert or get data
     private var mdataRepo: DataRepo
     private var mListLive: LiveData<List<NoteClass>>
 
@@ -22,10 +23,6 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         return mdataRepo.searchInDatabase(query)
     }
 
-//    fun searchDatabase(searchQuery: String): LiveData<List<Person>> {
-//        return repository.searchDatabase(searchQuery).asLiveData()
-//    }
-
     // to get data
     fun getAllData(): LiveData<List<NoteClass>> {
         return mListLive
@@ -36,11 +33,15 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         mdataRepo.insert(note)
     }
 
+    fun updateNote(note: NoteClass) {
+        mdataRepo.updateNote(note)
+    }
+
     fun deleteNote1(note: NoteClass) {
         mdataRepo.deleteNote1(note)
     }
 
-    fun updateNote(note: NoteClass) {
-        mdataRepo.updateNote(note)
+    fun pin(id : Long, pin : Boolean) {
+        mdataRepo.pin(id , pin)
     }
 }

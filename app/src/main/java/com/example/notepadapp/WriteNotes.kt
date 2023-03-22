@@ -15,10 +15,10 @@ import java.util.*
 
 class WriteNotes : AppCompatActivity() {
 
-    private lateinit var msave: ImageView
-    private lateinit var mbackButton: ImageView
-    private lateinit var mtitle: EditText
-    private lateinit var mdetail: EditText
+    private lateinit var mSave: ImageView
+    private lateinit var mBackButton: ImageView
+    private lateinit var mTitle: EditText
+    private lateinit var mDetail: EditText
     private lateinit var model: ViewModel
     private var mid: Long = -1
 
@@ -27,10 +27,10 @@ class WriteNotes : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_write_notes)
 
-        msave = findViewById(R.id.wsave)
-        mtitle = findViewById(R.id.wtitle)
-        mdetail = findViewById(R.id.wdetail)
-        mbackButton = findViewById(R.id.back_btn)
+        mSave = findViewById(R.id.wsave)
+        mTitle = findViewById(R.id.wtitle)
+        mDetail = findViewById(R.id.wdetail)
+        mBackButton = findViewById(R.id.back_btn)
 
         actionBar?.hide()
 
@@ -49,14 +49,14 @@ class WriteNotes : AppCompatActivity() {
             val title1 = intent.getStringExtra("mt").toString()
             val detail1 = intent.getStringExtra("md").toString()
 
-            mtitle.setText(title1)
-            mdetail.setText(detail1)
+            mTitle.setText(title1)
+            mDetail.setText(detail1)
         }
 
-        msave.setOnClickListener {
+        mSave.setOnClickListener {
 
-            val title = mtitle.text.toString()
-            val detail = mdetail.text.toString()
+            val title = mTitle.text.toString()
+            val detail = mDetail.text.toString()
 
             if (noteType.equals("Edit")) {
                 if (title.isNotEmpty() || detail.isNotEmpty()) {
@@ -91,7 +91,7 @@ class WriteNotes : AppCompatActivity() {
             startActivity(intent)
             this.finish()
         }
-        mbackButton.setOnClickListener {
+        mBackButton.setOnClickListener {
             sendIntent()
 
         }

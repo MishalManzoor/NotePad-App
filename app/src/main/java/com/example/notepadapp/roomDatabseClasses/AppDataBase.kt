@@ -30,38 +30,6 @@ abstract class AppDataBase : RoomDatabase(){
 }
 
 
-//            val tempInstance = INSTANCE
-//
-//            if (tempInstance != null) {
-//                return tempInstance
-//    }
-//                INSTANCE = instance
-
-/*
-
-@Database(entities = arrayOf(Emplyee::class), version = 1, exportSchema = false)
-abstract class RoomSingleton : RoomDatabase(){
-    abstract fun employeeDao():EmployeeDao
-
-    companion object{
-        private var INSTANCE: RoomSingleton? = null
-        fun getInstance(context:Context): RoomSingleton{
-            if (INSTANCE == null){
-                INSTANCE = Room.databaseBuilder(
-                    context,
-                    RoomSingleton::class.java,
-                    "roomdb")
-                    .build()
-            }
-
-            return INSTANCE as RoomSingleton
-        }
-    }
-}
- */
-
-
-
 
 
 

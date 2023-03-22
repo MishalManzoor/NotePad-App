@@ -10,6 +10,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class DataRepo(context: Context) {
+
     private var mnoteDao: NoteDao
     private var mAllData: LiveData<List<NoteClass>>
 
@@ -32,34 +33,18 @@ class DataRepo(context: Context) {
         return mnoteDao.searchInDatabase(query)
     }
 
-    // You must call this on a non-UI thread or your app will crash
+
     @OptIn(DelicateCoroutinesApi::class)
     fun insert(note: NoteClass) {
         GlobalScope.launch {
             mnoteDao.insert(note)
         }
-//        insertAsyncTask(mnoteDao).execute(note)
     }
 
-//    // this is for background task to insert data in db
-//    private class insertAsyncTask(dao: NoteDao) : AsyncTask<NoteClass, Void, Void>() {
-//
-//        private var mAsyncTask: NoteDao = dao
-//
-//        @OptIn(DelicateCoroutinesApi::class)
-//        override fun doInBackground(vararg p0: NoteClass?): Void? {
-//
-//            GlobalScope.launch {
-//                p0[0]?.let { mAsyncTask.insert(it) }
-//            }
-//            return null
-//        }
-//    }
-
     @OptIn(DelicateCoroutinesApi::class)
-    fun deleteNote(note: Long){
+    fun updateNote(note: NoteClass) {
         GlobalScope.launch {
-            mnoteDao.delete(note)
+            mnoteDao.update(note)
         }
     }
 
@@ -70,73 +55,12 @@ class DataRepo(context: Context) {
         }
     }
 
-    @OptIn(DelicateCoroutinesApi::class)
-    fun deleteList(note: List<Long>){
-        GlobalScope.launch {
-            mnoteDao.deleteList(note)
-        }
-    }
 
     @OptIn(DelicateCoroutinesApi::class)
     fun pin(id : Long, pin : Boolean){
         GlobalScope.launch {
             mnoteDao.pin(id, pin)
         }
-
-        /*
-
-    fun searchDatabase(searchQuery: String): Flow<List<Person>> {
-        return personDao.searchDatabase(searchQuery)
-    }
-         */
-    }
-
-//    @OptIn(DelicateCoroutinesApi::class)
-//    fun deleteListItems(note: List<NoteClass>){
-//        GlobalScope.launch {
-//            mnoteDao.deleteListItems(note)
-//        }
-//    }
-
-
-//    private class deleteAsyncTask(dao: NoteDao) : AsyncTask<NoteClass, Void, Void>() {
-//
-//        private var mAsyncTask: NoteDao = dao
-//
-//        @OptIn(DelicateCoroutinesApi::class)
-//        override fun doInBackground(vararg p0: NoteClass?): Void? {
-//
-//            GlobalScope.launch {
-//                p0[0]?.let { mAsyncTask.deleteListItems(it) }
-//            }
-//            return null
-//        }
-//    }
-
-    @OptIn(DelicateCoroutinesApi::class)
-    fun updateNote(note: NoteClass) {
-       // insertAsyncTask(mnoteDao).execute(note)
-        GlobalScope.launch {
-            mnoteDao.update(note)
-        }
-    }
-
-    @OptIn(DelicateCoroutinesApi::class)
-    fun updateValue(id : Long, title : String, detail : String) {
-        GlobalScope.launch {
-            mnoteDao.updateValues(id,title,detail)
-        }
-    }
-
-    @OptIn(DelicateCoroutinesApi::class)
-    fun onTopPin(id : List<Long>, pin: Boolean) {
-        GlobalScope.launch {
-            mnoteDao.onTopPin(id , pin)
-        }
-    }
-
-    fun getID(id : Long){
-        mnoteDao.getId(id)
     }
 }
 

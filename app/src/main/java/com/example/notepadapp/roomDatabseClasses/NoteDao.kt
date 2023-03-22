@@ -9,35 +9,14 @@ interface NoteDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(note : NoteClass)
 
-    @Query("delete from note where id = :id")
-    suspend fun delete(id : Long)
-
-    @Query("delete from note where id = :id")
-    suspend fun deleteList(id : List<Long>)
+    @Update
+    suspend fun update(note : NoteClass)
 
     @Delete
     suspend fun deleteNote(id : NoteClass)
 
-    @Update
-    suspend fun update(note : NoteClass)
-
     @Query("UPDATE note SET pin = :pin WHERE id = :id")
-   suspend fun pin(id : Long, pin : Boolean)
-
-   @Query("UPDATE note SET pin = :pin WHERE id = :id")
-   suspend fun onTopPin(id: List<Long>, pin: Boolean)
-
-    @Query("UPDATE note SET title=:title,detail=:detail WHERE id LIKE :id")
-    suspend fun updateValues(id : Long, title : String, detail : String)
-
-    /*
-     @Query("SELECT * FROM person_table WHERE firstName LIKE
-     :searchQuery OR lastName LIKE :searchQuery")
-    // and then search query will be passed through
-    // the perimeter of this function
-    // and then function will return the flow of list of person
-    fun searchDatabase(searchQuery: String): Flow<List<Person>>
-     */
+    suspend fun pin(id : Long, pin : Boolean)
 
     @Query("SELECT * FROM note WHERE title LIKE :query OR detail LIKE :query")
     fun searchInDatabase(query : String) : LiveData<List<NoteClass>>
@@ -45,21 +24,6 @@ interface NoteDao {
     //Get all items
     @Query("SELECT * FROM note ORDER BY id DESC")
     fun getAllDataOfUser() : LiveData<List<NoteClass>>
-    /*
-     @Query("SELECT * FROM person_table WHERE firstName LIKE :searchQuery OR lastName LIKE :searchQuery")
-    // and then search query will be passed through
-    // the perimeter of this function
-    // and then function will return the flow of list of person
-    fun searchDatabase(searchQuery: String): Flow<List<Person>>
-     */
-    @Query("SELECT * FROM note WHERE title LIKE :query OR detail LIKE :query")
-    // and then search query will be passed through
-    // the perimeter of this function
-    // and then function will return the list of NOTE
-   fun searchDatabase(query : String) : LiveData<List<NoteClass>>
-
-   @Query("SELECT *FROM note WHERE id =:id")
-   fun getId(id : Long) : NoteClass
 }
 
 

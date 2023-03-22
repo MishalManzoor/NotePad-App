@@ -6,22 +6,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "note")
 data class NoteClass (
-//    @PrimaryKey @ColumnInfo(name = "id") var id: Long = 0,
     @PrimaryKey(autoGenerate = true) var id : Long,
     @ColumnInfo(name = "title") var title : String,
     @ColumnInfo(name = "detail") var detail : String,
     @ColumnInfo(name = "date") var date : String,
     @ColumnInfo(name = "pin") var pin : Boolean = false
 )
-/*
-@Entity(tableName = "employeeTbl")
-data class Emplyee(
-    @PrimaryKey
-    var id:Long?,
-    @ColumnInfo(name = "uuid")
-    var name: String
-)
- */
 
 
 
