@@ -1,5 +1,5 @@
 
-# NotePadApp in Kotlin
+# NotePad App in Kotlin
 
 Simple Notepad Android app built using:
 
