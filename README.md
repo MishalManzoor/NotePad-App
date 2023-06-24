@@ -10,7 +10,7 @@ Simple Notepad Android app built using:
 
  ## Architecture
 
- - MVC Architecture
+ - MVVM Architecture
 
 
 ## dependencies
