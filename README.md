@@ -13,17 +13,7 @@ Simple Notepad Android app built using:
  - MVVM Architecture
 
 
-## dependencies
-
-```bash
-   // Room
-    implementation "androidx.room:room-runtime:2.5.0"
-    kapt "androidx.room:room-compiler:2.5.0"
-    implementation "androidx.room:room-ktx:2.5.0" // kotlin & coroutine support
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
-```
+## ScreenShots
 
 ![IMG_20230322_102156](https://user-images.githubusercontent.com/97946979/226828823-42e68840-cf3d-428d-afc9-fadf0387c4a1.jpg)
 
